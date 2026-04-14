@@ -124,8 +124,8 @@ export default function PatientIntakePage() {
   };
 
   const steps = [
-    { id: 1, title: 'Basic Info', icon: UserPlus },
-    { id: 2, title: 'Medical Info', icon: ClipboardList },
+    { id: 1, title: 'Personal Information', icon: UserPlus },
+    { id: 2, title: 'Medical Details', icon: ClipboardList },
     { id: 3, title: 'Emergency & Review', icon: PhoneCall },
   ];
 
@@ -133,8 +133,8 @@ export default function PatientIntakePage() {
     <div className="max-w-4xl mx-auto space-y-10">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
-          <h1 className="text-4xl font-extrabold tracking-tight text-text-base mb-2">Patient Intake</h1>
-          <p className="text-muted font-medium">Follow the clinical registration wizard</p>
+          <h1 className="text-4xl font-extrabold tracking-tight text-text-base mb-2">Patient Registration</h1>
+          <p className="text-muted font-medium">Capture patient information for clinical processing</p>
         </div>
         <div className="flex items-center gap-1 bg-accent/40 p-2 rounded-2xl border border-border-base">
           {steps.map((s, i) => (
@@ -282,7 +282,7 @@ export default function PatientIntakePage() {
                       </select>
                     </div>
                     <Input 
-                      label="Allergies (comma separated)" 
+                      label="Allergies" 
                       {...register('allergies')}
                       placeholder="e.g. Peanuts, Aspirin" 
                     />
@@ -420,11 +420,11 @@ export default function PatientIntakePage() {
                   }}
                   disabled={isLoading}
                 >
-                  Save as Draft
+                  Save Draft
                 </Button>
                 {step < 3 ? (
                   <Button type="button" onClick={nextStep} className="gap-2 min-w-[140px]">
-                    Next Step <ChevronRight className="h-4 w-4" />
+                    Continue <ChevronRight className="h-4 w-4" />
                   </Button>
                 ) : (
                   <div className="flex flex-col">

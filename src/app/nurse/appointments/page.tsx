@@ -185,12 +185,12 @@ export default function NurseAppointmentsPage() {
             <ArrowLeft className="h-5 w-5 text-muted group-hover:text-white transition-colors" />
           </Link>
           <div>
-            <h1 className="text-4xl font-extrabold tracking-tight text-text-base mb-2">Clinical Schedule</h1>
-            <p className="text-muted font-medium">Manage and deploy patient-physician encounters</p>
+            <h1 className="text-4xl font-extrabold tracking-tight text-text-base mb-2">Appointment Management</h1>
+            <p className="text-muted font-medium">Schedule and manage patient visits efficiently</p>
           </div>
         </div>
         <Button onClick={handleNewAppointment} className="group h-14 px-8 rounded-full gap-3 text-base shadow-xl shadow-primary/30 hover:shadow-2xl hover:-translate-y-1 transition-all border border-primary/20">
-          <Plus className="h-5 w-5 group-hover:rotate-90 transition-transform duration-300" /> Schedule Session
+          <Plus className="h-5 w-5 group-hover:rotate-90 transition-transform duration-300" /> Schedule Appointment
         </Button>
       </div>
 
@@ -230,7 +230,7 @@ export default function NurseAppointmentsPage() {
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted group-focus-within:text-primary transition-colors" />
             <input 
               className="w-full h-12 md:h-14 pl-12 pr-12 bg-accent/40 rounded-2xl border border-transparent focus:bg-surface focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary font-semibold text-sm transition-all shadow-inner"
-              placeholder="Filter by patient or physician..."
+              placeholder="Search patient or doctor..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -321,7 +321,7 @@ export default function NurseAppointmentsPage() {
                 <div className="h-16 w-16 rounded-full bg-accent flex items-center justify-center text-muted mb-2">
                   <CalendarClock className="h-8 w-8 opacity-50" />
                 </div>
-                <span className="font-bold text-text-base text-lg">No Encounters</span>
+                <span className="font-bold text-text-base text-lg">No appointments scheduled yet</span>
                 <span className="font-medium text-muted text-sm">Queue is clear.</span>
                 {(searchTerm || filterStatus !== 'All') && (
                   <Button onClick={() => { setSearchTerm(''); setFilterStatus('All'); }} variant="outline" className="mt-2 h-9 rounded-xl font-bold">Clear Filters</Button>
@@ -334,9 +334,9 @@ export default function NurseAppointmentsPage() {
           <Table className="hidden md:table">
             <TableHeader className="bg-accent/40">
               <TableRow className="border-b border-border-base">
-                <TableHead className="py-5 font-black uppercase text-[10px] tracking-widest">Encounter Details</TableHead>
+                <TableHead className="py-5 font-black uppercase text-[10px] tracking-widest">Patient</TableHead>
                 <TableHead className="py-5 font-black uppercase text-[10px] tracking-widest">Physician</TableHead>
-                <TableHead className="py-5 font-black uppercase text-[10px] tracking-widest text-center">Timing</TableHead>
+                <TableHead className="py-5 font-black uppercase text-[10px] tracking-widest text-center">Time</TableHead>
                 <TableHead className="py-5 font-black uppercase text-[10px] tracking-widest">Type</TableHead>
                 <TableHead className="py-5 font-black uppercase text-[10px] tracking-widest">Status</TableHead>
                 <TableHead className="py-5 text-right w-10"></TableHead>
@@ -414,8 +414,8 @@ export default function NurseAppointmentsPage() {
                        <div className="h-16 w-16 rounded-full bg-accent flex items-center justify-center text-muted mb-2">
                          <CalendarClock className="h-8 w-8 opacity-50" />
                        </div>
-                       <span className="font-bold text-text-base text-lg">No Encounters Scheduled</span>
-                       <span className="font-medium text-muted text-sm max-w-[300px]">Queue is clear. Click &quot;Schedule Session&quot; to assign a patient.</span>
+                       <span className="font-bold text-text-base text-lg">No appointments scheduled yet</span>
+                       <span className="font-medium text-muted text-sm max-w-[300px]">Queue is clear. Click &quot;Schedule Appointment&quot; to assign a patient.</span>
                        {(searchTerm || filterStatus !== 'All') && (
                          <Button onClick={() => { setSearchTerm(''); setFilterStatus('All'); }} variant="outline" className="mt-4 h-9 rounded-xl font-bold">Clear Filters</Button>
                        )}
@@ -556,7 +556,7 @@ export default function NurseAppointmentsPage() {
 
           <div className="flex justify-end gap-3 pt-6 mt-4 border-t border-border-base/50">
             <Button variant="ghost" type="button" onClick={() => { setIsModalOpen(false); reset(); }} className="h-12 px-6 rounded-xl font-bold hover:bg-accent border border-transparent hover:border-border-base transition-all">Discard</Button>
-            <Button type="submit" className="h-12 px-10 rounded-xl font-black gap-2 shadow-lg shadow-primary/30 hover:shadow-xl hover:-translate-y-0.5 transition-all">{editingAppointmentId ? "Update Schedule" : "Deploy Encounter"} <ChevronRight className="h-4 w-4" /></Button>
+            <Button type="submit" className="h-12 px-10 rounded-xl font-black gap-2 shadow-lg shadow-primary/30 hover:shadow-xl hover:-translate-y-0.5 transition-all">{editingAppointmentId ? "Update Schedule" : "Schedule Appointment"} <ChevronRight className="h-4 w-4" /></Button>
           </div>
         </form>
       </Modal>

@@ -36,10 +36,10 @@ export default function DoctorDashboard() {
   const nextPatientData = nextPatient ? patients.find(p => p.id === nextPatient.patientId) : null;
 
   const stats = [
-    { label: 'Today', value: todayAppointments.length, icon: CalendarDays, color: 'text-primary', bg: 'bg-primary/10' },
-    { label: 'Weekly', value: appointments.length, icon: Calendar, color: 'text-green-600', bg: 'bg-green-100 dark:bg-green-900/30' },
-    { label: 'Total Patients', value: patients.length, icon: Users, color: 'text-purple-600', bg: 'bg-purple-100 dark:bg-purple-900/30' },
-    { label: 'Wait Time', value: '0m', icon: Clock, color: 'text-amber-600', bg: 'bg-amber-100 dark:bg-amber-900/30' },
+    { label: 'Today’s Sessions', value: todayAppointments.length, icon: CalendarDays, color: 'text-primary', bg: 'bg-primary/10' },
+    { label: 'Weekly Appointments', value: appointments.length, icon: Calendar, color: 'text-green-600', bg: 'bg-green-100 dark:bg-green-900/30' },
+    { label: 'Total Patients Managed', value: patients.length, icon: Users, color: 'text-purple-600', bg: 'bg-purple-100 dark:bg-purple-900/30' },
+    { label: 'Average Wait Time', value: '0m', icon: Clock, color: 'text-amber-600', bg: 'bg-amber-100 dark:bg-amber-900/30' },
   ];
 
   return (
@@ -51,9 +51,9 @@ export default function DoctorDashboard() {
             animate={{ opacity: 1, x: 0 }}
             className="text-2xl sm:text-4xl font-extrabold tracking-tight text-text-base mb-1"
           >
-            Welcome, {user?.name}
+            Welcome, Dr. {user?.name?.replace('Dr. ', '')}
           </motion.h1>
-          <p className="text-muted font-medium text-sm">{formatDate(new Date())} · {todayAppointments.length} sessions today</p>
+          <p className="text-muted font-medium text-sm">Here’s your clinical overview for today.</p>
         </div>
         <div className="flex items-center gap-3">
           <Button variant="outline" size="icon" className="relative h-10 w-10 rounded-xl flex-shrink-0">
@@ -123,7 +123,7 @@ export default function DoctorDashboard() {
 
                     <Link href={`/doctor/patient/${nextPatient.patientId}`} className="block">
                       <Button className="w-full sm:w-auto h-12 sm:h-14 px-8 sm:px-10 rounded-2xl gap-3 text-base shadow-xl shadow-primary/30">
-                        Enter Consultation <ArrowRight className="h-5 w-5" />
+                        Start Consultation <ArrowRight className="h-5 w-5" />
                       </Button>
                     </Link>
                   </div>
@@ -133,7 +133,7 @@ export default function DoctorDashboard() {
                   <div className="h-16 w-16 rounded-full bg-accent flex items-center justify-center text-primary">
                     <CheckCircle2 className="h-8 w-8" />
                   </div>
-                  Queue complete. No active sessions.
+                  No active consultations at the moment.
                 </div>
               )}
             </div>
@@ -174,8 +174,8 @@ export default function DoctorDashboard() {
                     <div className="h-16 w-16 bg-accent rounded-full flex items-center justify-center text-muted">
                        <CalendarDays className="h-8 w-8 opacity-50" />
                     </div>
-                    <p className="font-bold text-text-base">Your Schedule is Clear</p>
-                    <p className="text-xs font-medium text-muted max-w-[200px]">There are no encounters deployed to your queue today.</p>
+                    <p className="font-bold text-text-base">Your schedule is clear for today</p>
+                    <p className="text-xs font-medium text-muted max-w-[200px]">No appointments scheduled yet.</p>
                   </div>
                 )}
               </div>

@@ -44,7 +44,7 @@ export default function DoctorAppointmentsPage() {
           </Link>
           <div>
             <h1 className="text-4xl font-extrabold tracking-tight text-text-base mb-2">Physician Schedule</h1>
-            <p className="text-muted font-medium">Coordinate clinical encounters and patient reviews</p>
+            <p className="text-muted font-medium">Manage patient consultations and clinical sessions</p>
           </div>
         </div>
       <div className="flex flex-wrap items-center gap-3 bg-accent/40 p-1.5 rounded-2xl border border-border-base self-start">
@@ -71,7 +71,7 @@ export default function DoctorAppointmentsPage() {
                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted" />
                  <input 
                    className="w-full h-12 pl-12 pr-4 bg-accent/30 rounded-2xl border border-border-base focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary font-medium text-sm transition-all"
-                   placeholder="Search your patient roster..."
+                   placeholder="Search patients or appointments..."
                    value={searchTerm}
                    onChange={(e) => setSearchTerm(e.target.value)}
                  />
@@ -122,8 +122,7 @@ export default function DoctorAppointmentsPage() {
                      <div className="h-16 w-16 rounded-full bg-accent flex items-center justify-center text-muted mb-2">
                        <AlertCircle className="h-8 w-8 opacity-50" />
                      </div>
-                     <span className="font-bold text-text-base text-lg">No Active Encounters</span>
-                     <span className="font-medium text-muted text-sm">Queue is clear for this filter.</span>
+                     <span className="font-bold text-text-base text-lg">No appointments scheduled yet</span>
                    </div>
                  )}
                </div>
@@ -183,8 +182,7 @@ export default function DoctorAppointmentsPage() {
                              <div className="h-16 w-16 rounded-full bg-accent flex items-center justify-center text-muted mb-2">
                                <AlertCircle className="h-8 w-8 opacity-50" />
                              </div>
-                             <span className="font-bold text-text-base text-lg">No Active Encounters</span>
-                             <span className="font-medium text-muted text-sm max-w-[300px]">The clinical matrix is empty for the current filter criteria.</span>
+                             <span className="font-bold text-text-base text-lg">No appointments scheduled yet</span>
                           </div>
                         </TableCell>
                       </TableRow>

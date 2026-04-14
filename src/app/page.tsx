@@ -33,22 +33,22 @@ export default function LandingPage() {
 
   const features = [
     {
-      title: "Smart Intake Stepper",
-      description: "Multi-step patient registration with auto-age calculation and real-time validation system.",
+      title: "Smart Intake Workflow",
+      description: "Efficient multi-step patient registration with real-time validation and automated age calculation.",
       icon: ClipboardCheck,
       color: "text-blue-600",
       bgColor: "bg-blue-50"
     },
     {
-      title: "Unified Scheduling",
-      description: "Doctor availability tracking and smart appointment booking with conflict prevention.",
+      title: "Unified Scheduling System",
+      description: "Manage doctor availability, appointments, and patient flow from a single intelligent interface.",
       icon: CalendarDays,
       color: "text-indigo-600",
       bgColor: "bg-indigo-50"
     },
     {
-      title: "Physician Insights",
-      description: "Patient history overview, clinical notes tracking, and live activity timelines.",
+      title: "Clinical Insights Dashboard",
+      description: "Access patient history, notes, and activity timelines with high-visibility alerts.",
       icon: Stethoscope,
       color: "text-sky-600",
       bgColor: "bg-sky-50"
@@ -139,7 +139,7 @@ export default function LandingPage() {
                 <br className="md:hidden" />
                 Workflows.
               </h1>
-              <p className="text-xl md:text-2xl font-black italic text-blue-600/40 tracking-tight">Built for Real Hospitals.</p>
+              <p className="text-xl md:text-2xl font-black italic text-blue-600/40 tracking-tight">Built for Modern Healthcare Systems.</p>
             </motion.div>
 
             {/* Subheadline */}
@@ -149,7 +149,7 @@ export default function LandingPage() {
               transition={{ delay: 0.3 }}
               className="text-lg md:text-xl text-slate-500 font-bold max-w-2xl mx-auto leading-relaxed"
             >
-              Streamline patient intake, optimize doctor scheduling, and centralize clinical intelligence — all in one unified healthcare platform.
+              Streamline patient intake, optimize physician scheduling, and centralize clinical intelligence — all within a unified, high-performance platform designed for real-world care teams.
             </motion.p>
 
             {/* CTAs */}
@@ -161,12 +161,12 @@ export default function LandingPage() {
             >
               <Link href="/login">
                 <Button className="h-20 px-12 rounded-3xl bg-blue-600 hover:bg-blue-700 text-white text-xl font-black shadow-2xl shadow-blue-500/20 group transition-all hover:scale-105 active:scale-95">
-                  Enter Portal <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-1 transition-transform" />
+                  Enter Clinical Portal <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
               <Link href="#features">
                 <Button variant="outline" className="h-20 px-12 rounded-3xl text-xl font-black border-4 border-slate-100 hover:border-slate-200 transition-all active:scale-95">
-                  View Demo
+                  Explore Platform
                 </Button>
               </Link>
             </motion.div>

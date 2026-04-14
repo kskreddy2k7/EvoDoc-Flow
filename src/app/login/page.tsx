@@ -113,8 +113,8 @@ export default function LoginPage() {
         
         <div className="w-full max-w-lg mx-auto space-y-10 lg:mt-0 mt-8">
           <div className="text-center space-y-3">
-             <h2 className="text-3xl lg:text-4xl font-black tracking-tight text-text-base">Portal Access</h2>
-             <p className="text-muted font-bold tracking-tight">Select your clinical role to proceed</p>
+             <h2 className="text-3xl lg:text-4xl font-black tracking-tight text-text-base">Secure Clinical Access</h2>
+             <p className="text-muted font-bold tracking-tight">Sign in to your clinical workspace to manage patient operations and workflows.</p>
           </div>
 
           <div className="flex flex-col sm:flex-row bg-accent/50 p-1.5 rounded-3xl border border-border-base relative overflow-hidden gap-1.5">
@@ -154,7 +154,7 @@ export default function LoginPage() {
             <CardContent className="p-10">
               <form onSubmit={handleLogin} className="space-y-6">
                 <Input 
-                  label="Email or Staff ID" 
+                  label="Work Email" 
                   placeholder={role === 'nurse' ? 'nurse@evodoc.com' : 'doctor@evodoc.com'}
                   value={form.id}
                   onChange={(e) => { setForm({...form, id: e.target.value}); setError(''); }}
@@ -163,7 +163,7 @@ export default function LoginPage() {
                 />
                 <div className="relative">
                   <Input 
-                    label="Password" 
+                    label="Secure Key" 
                     type={showPassword ? 'text' : 'password'} 
                     placeholder="••••••••"
                     value={form.password}
@@ -203,7 +203,7 @@ export default function LoginPage() {
                    isLoading={isLoading}
                 >
                   {isLoading ? 'Authenticating...' : (
-                    <>Confirm Authorization <ArrowRight className="h-5 w-5" /></>
+                    <>Access Dashboard <ArrowRight className="h-5 w-5" /></>
                   )}
                 </Button>
               </form>
@@ -212,7 +212,7 @@ export default function LoginPage() {
 
           <div className="text-center space-y-5">
             <p className="text-xs font-bold text-muted uppercase tracking-[0.2em] max-w-[280px] mx-auto leading-relaxed">
-               Access restricted to authorized medical personnel. IP Logging active.
+               Access restricted to authorized medical personnel.
             </p>
             <div className="flex items-center justify-center gap-2 text-[10px] text-green-600 font-bold bg-green-500/10 w-max mx-auto px-4 py-2 rounded-full border border-green-500/20">
               <Lock className="h-3 w-3" /> Secure login • Encrypted access
