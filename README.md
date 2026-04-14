@@ -1,77 +1,308 @@
-# EvoDoc Flow 🏥
+# 🏥 EvoDoc Flow — Clinical Workflow Management System
 
-**Reimagining Clinical Workflows** — A modern, production-ready healthcare management platform designed for seamless patient intake and physician workflow optimization.
-
-## 🚀 Overview
-
-EvoDoc Flow is a role-based healthcare application built to bridge the gap between administrative intake and clinical consultation. It features dedicated portals for Nurses/Receptionists and Doctors, providing a unified source of truth for patient care.
-
-## ✨ Key Features
-
-### 🔐 Multi-Role Auth System
-- **Nurse/Receptionist Portal**: Optimized for speed and accuracy during patient registration.
-- **Doctor Portal**: Data-rich environment for clinical assessment and notes.
-- Simulated authentication with persistent role sessions.
-
-### 👩‍⚕️ Nurse / Receptionist Portal
-- **Smart Patient Intake**: Multi-section form with auto-calculating age logic and medical history capture.
-- **Appointment Management**: Quick-booking interface with doctor availability tracking and filterable tables.
-- **Draft Mode**: Ability to save progress during registration.
-
-### 👨‍⚕️ Doctor Portal
-- **Clinical Dashboard**: Overview of today's schedule, "Next Patient" highlights, and clinical stats.
-- **Longitudinal Patient Details**: Tabbed interface covering medical history, past visits, and current medications.
-- **Session Notes**: High-performance rich-text area for clinical observations and session recording.
-
-## 🛠️ Tech Stack
-
-- **Framework**: Next.js 15+ (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **State Management**: Zustand (with Persist Middleware)
-- **Icons**: Lucide React
-- **Animations**: Framer Motion
-- **Date Handling**: date-fns
-- **Notifications**: React Hot Toast
-
-## 📂 Folder Structure
-
-```
-src/
-├── app/               # Next.js App Router (Pages & Layouts)
-│   ├── doctor/        # Doctor Portal Routes
-│   ├── nurse/         # Nurse Portal Routes
-│   ├── login/         # Authentication
-│   └── globals.css    # Global styling & animations
-├── components/        
-│   └── ui/            # Reusable Atomic UI Components
-├── store/             # Zustand Global State
-├── lib/               # Utility functions (cn, date helpers)
-└── types/             # TypeScript Definitions
-```
-
-## ⚙️ Setup Instructions
-
-1. **Clone & Install**
-   ```bash
-   npm install
-   ```
-
-2. **Run Development Server**
-   ```bash
-   npm run dev
-   ```
-
-3. **Open the App**
-   Navigate to [http://localhost:3000](http://localhost:3000)
-
-## 🎨 Design Decisions
-
-- **Color Palette**: Primary Blue (`#2563EB`) chosen for trust and clarity in medical environments.
-- **Typography**: Inter (System-optimized sans-serif) for high readability in data-intensive tables.
-- **UX Flow**: Minimized clicks and clear visual hierarchy (Badges for status, glassmorphism for modern feel).
-- **Responsive**: Mobile-first grid layouts ensuring usability on tablets in clinical settings.
+A modern, role-based healthcare web application designed to streamline patient intake, appointment scheduling, and clinical workflows for real-world care teams.
 
 ---
 
-Built with ❤️ for Healthcare Excellence.
+## 🌐 Live Demo
+
+👉 https://evo-doc-flow.vercel.app
+
+---
+
+## 📌 Overview
+
+EvoDoc Flow is a production-ready frontend application built to simulate how clinics manage patient flow efficiently.
+
+The system provides **two dedicated portals**:
+
+* 👩‍⚕️ **Nurse / Receptionist Portal** — for patient intake and appointment management
+* 🧑‍⚕️ **Doctor Portal** — for clinical overview, scheduling, and patient insights
+
+The goal was to design a **clean, intuitive, and scalable interface** that reflects real clinical workflows.
+
+---
+
+## 🚀 Key Features
+
+### 🧾 Patient Intake System
+
+* Multi-step patient registration (Personal, Medical, Emergency)
+* Auto age calculation from DOB
+* Structured clinical data capture
+
+### 📅 Appointment Management
+
+* Schedule appointments with doctor selection
+* Filter by status (Scheduled, Completed, Cancelled)
+* Search by patient or physician
+
+### 🧑‍⚕️ Doctor Dashboard
+
+* Daily and weekly appointment insights
+* Patient statistics and wait time tracking
+* Activity timeline with recent updates
+
+### 📊 Clinical Workflow Design
+
+* Clear separation of nurse and doctor responsibilities
+* Optimized UI for fast data entry and review
+* Real-world inspired workflow structure
+
+### 🎨 Modern UI/UX
+
+* Clean SaaS-style interface
+* Fully responsive (mobile, tablet, desktop)
+* Light/Dark theme support
+
+---
+
+## 🛠️ Tech Stack
+
+* **Framework:** Next.js (App Router)
+* **Language:** TypeScript
+* **Styling:** Tailwind CSS
+* **State Management:** Zustand
+* **UI Icons:** Lucide React
+* **Date Handling:** date-fns
+* **Deployment:** Vercel
+
+---
+
+## 🧠 Design Decisions
+
+* **Role-Based Architecture:** Separate portals improve clarity and usability
+* **Zustand for State:** Lightweight and scalable for managing patients and appointments
+* **Component Reusability:** UI components designed for consistency and maintainability
+* **Clinical Workflow Focus:** Prioritized real-world usability over generic layouts
+
+---
+
+## ⚙️ Getting Started
+
+Clone the repository:
+
+```bash
+git clone https://github.com/kskreddy2k7/EvoDoc-Flow.git
+cd EvoDoc-Flow
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run locally:
+
+```bash
+npm run dev
+```
+
+Build for production:
+
+```bash
+npm run build
+```
+
+---
+
+## 📱 Responsive Design
+
+The application is optimized for:
+
+* Desktop dashboards (primary use case)
+* Tablet layouts
+* Mobile-friendly navigation
+
+---
+
+## 🔐 Notes
+
+* Authentication is simulated using local state
+* Data is stored in-memory (no backend integration)
+* Designed as a frontend-focused system for demonstration purposes
+
+---
+
+## 🎯 Future Improvements
+
+* Backend integration (Node.js / Firebase)
+* Real authentication system (JWT / OAuth)
+* Role-based access control (RBAC)
+* Database integration for persistent storage
+* Notifications and real-time updates
+
+---
+
+## 👨‍💻 Author
+
+**Kata Sai Kranthu Reddy**
+
+* GitHub: https://github.com/kskreddy2k7
+
+---
+
+## ⭐ Final Note
+
+This project focuses on building a **real-world healthcare UI system** with clean architecture, intuitive workflows, and production-level design.
+
+It reflects how modern clinical platforms can improve efficiency, reduce manual work, and enhance patient management.
+
+---
+
+> Designed with a focus on clarity, usability, and real-world clinical flow.
+# 🏥 EvoDoc Flow — Clinical Workflow Management System
+
+A modern, role-based healthcare web application designed to streamline patient intake, appointment scheduling, and clinical workflows for real-world care teams.
+
+---
+
+## 🌐 Live Demo
+
+👉 https://evo-doc-flow.vercel.app
+
+---
+
+## 📌 Overview
+
+EvoDoc Flow is a production-ready frontend application built to simulate how clinics manage patient flow efficiently.
+
+The system provides **two dedicated portals**:
+
+* 👩‍⚕️ **Nurse / Receptionist Portal** — for patient intake and appointment management
+* 🧑‍⚕️ **Doctor Portal** — for clinical overview, scheduling, and patient insights
+
+The goal was to design a **clean, intuitive, and scalable interface** that reflects real clinical workflows.
+
+---
+
+## 🚀 Key Features
+
+### 🧾 Patient Intake System
+
+* Multi-step patient registration (Personal, Medical, Emergency)
+* Auto age calculation from DOB
+* Structured clinical data capture
+
+### 📅 Appointment Management
+
+* Schedule appointments with doctor selection
+* Filter by status (Scheduled, Completed, Cancelled)
+* Search by patient or physician
+
+### 🧑‍⚕️ Doctor Dashboard
+
+* Daily and weekly appointment insights
+* Patient statistics and wait time tracking
+* Activity timeline with recent updates
+
+### 📊 Clinical Workflow Design
+
+* Clear separation of nurse and doctor responsibilities
+* Optimized UI for fast data entry and review
+* Real-world inspired workflow structure
+
+### 🎨 Modern UI/UX
+
+* Clean SaaS-style interface
+* Fully responsive (mobile, tablet, desktop)
+* Light/Dark theme support
+
+---
+
+## 🛠️ Tech Stack
+
+* **Framework:** Next.js (App Router)
+* **Language:** TypeScript
+* **Styling:** Tailwind CSS
+* **State Management:** Zustand
+* **UI Icons:** Lucide React
+* **Date Handling:** date-fns
+* **Deployment:** Vercel
+
+---
+
+## 🧠 Design Decisions
+
+* **Role-Based Architecture:** Separate portals improve clarity and usability
+* **Zustand for State:** Lightweight and scalable for managing patients and appointments
+* **Component Reusability:** UI components designed for consistency and maintainability
+* **Clinical Workflow Focus:** Prioritized real-world usability over generic layouts
+
+---
+
+## ⚙️ Getting Started
+
+Clone the repository:
+
+```bash
+git clone https://github.com/kskreddy2k7/EvoDoc-Flow.git
+cd EvoDoc-Flow
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run locally:
+
+```bash
+npm run dev
+```
+
+Build for production:
+
+```bash
+npm run build
+```
+
+---
+
+## 📱 Responsive Design
+
+The application is optimized for:
+
+* Desktop dashboards (primary use case)
+* Tablet layouts
+* Mobile-friendly navigation
+
+---
+
+## 🔐 Notes
+
+* Authentication is simulated using local state
+* Data is stored in-memory (no backend integration)
+* Designed as a frontend-focused system for demonstration purposes
+
+---
+
+## 🎯 Future Improvements
+
+* Backend integration (Node.js / Firebase)
+* Real authentication system (JWT / OAuth)
+* Role-based access control (RBAC)
+* Database integration for persistent storage
+* Notifications and real-time updates
+
+---
+
+## 👨‍💻 Author
+
+**Kata Sai Kranthu Reddy**
+
+* GitHub: https://github.com/kskreddy2k7
+
+---
+
+## ⭐ Final Note
+
+This project focuses on building a **real-world healthcare UI system** with clean architecture, intuitive workflows, and production-level design.
+
+It reflects how modern clinical platforms can improve efficiency, reduce manual work, and enhance patient management.
+
+---
+
+> Designed with a focus on clarity, usability, and real-world clinical flow.
