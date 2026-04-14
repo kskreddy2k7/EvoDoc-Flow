@@ -48,7 +48,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} bg-bg-base text-text-base antialiased`}>
+      <body className={`${inter.className} bg-background text-foreground antialiased`}>
         <ErrorBoundary>
           <ThemeProvider>
             <SidebarProvider>

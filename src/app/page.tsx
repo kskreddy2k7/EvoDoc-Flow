@@ -65,12 +65,12 @@ export default function LandingPage() {
   const trustLogos = ["CareOne", "MedCore", "HealthPlus", "BioLabs"];
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-blue-100 selection:text-blue-900 overflow-x-hidden">
+    <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/20 selection:text-primary overflow-x-hidden">
       
       {/* --- NAVBAR --- */}
       <nav className={cn(
         "fixed top-0 w-full z-50 transition-all duration-500",
-        scrolled ? "bg-white/90 backdrop-blur-xl border-b border-slate-200 py-3 shadow-sm" : "bg-transparent py-5"
+        scrolled ? "bg-background/90 backdrop-blur-xl border-b border-border py-3 shadow-sm" : "bg-transparent py-5"
       )}>
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 group">
@@ -133,7 +133,7 @@ export default function LandingPage() {
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
               className="space-y-4"
             >
-              <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-[0.85] text-slate-900">
+              <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-[0.85] text-foreground">
                 Intelligent <br className="hidden md:block" /> 
                 <span className="bg-gradient-to-b from-blue-600 to-blue-800 bg-clip-text text-transparent italic mr-2">Clinical</span>
                 <br className="md:hidden" />
@@ -186,10 +186,10 @@ export default function LandingPage() {
         </section>
 
         {/* --- FEATURES SECTION --- */}
-        <section id="platform" className="py-40 bg-slate-50/50">
+        <section id="platform" className="py-40 bg-slate-50/50 dark:bg-slate-900/50">
           <div className="max-w-7xl mx-auto px-6">
             <div className="max-w-3xl mb-24 space-y-6">
-              <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-slate-900">Precision Clinical Modules</h2>
+              <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-foreground">Precision Clinical Modules</h2>
               <p className="text-blue-600 font-black uppercase text-xs tracking-widest leading-loose border-l-4 border-blue-600 pl-6">
                 Engineered for speed. <br /> Built for absolute clinical accuracy.
               </p>
@@ -207,13 +207,13 @@ export default function LandingPage() {
                   className="group bg-white p-12 rounded-[2.5rem] border border-slate-100 transition-all shadow-sm hover:shadow-2xl hover:shadow-blue-500/5 overflow-hidden relative"
                 >
                   <div className="absolute top-0 right-0 p-8 opacity-0 group-hover:opacity-5 transition-opacity">
-                    <feature.icon className="h-32 w-32 -mr-16 -mt-16 text-slate-900" />
+                    <feature.icon className="h-32 w-32 -mr-16 -mt-16 text-foreground" />
                   </div>
-                  <div className={cn("p-5 rounded-2xl w-fit mb-10 transition-all group-hover:rotate-6", feature.bgColor)}>
+                  <div className={cn("p-5 rounded-2xl w-fit mb-10 transition-all group-hover:rotate-6", feature.bgColor, "dark:bg-slate-800")}>
                     <feature.icon className={cn("h-8 w-8", feature.color)} />
                   </div>
-                  <h3 className="text-2xl font-black mb-4 text-slate-900 tracking-tight leading-none">{feature.title}</h3>
-                  <p className="text-slate-500 font-bold leading-relaxed">{feature.description}</p>
+                  <h3 className="text-2xl font-black mb-4 text-foreground tracking-tight leading-none">{feature.title}</h3>
+                  <p className="text-muted font-bold leading-relaxed">{feature.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -221,7 +221,7 @@ export default function LandingPage() {
         </section>
 
         {/* --- WORKFLOW SECTION --- */}
-        <section id="clinical-workflow" className="py-32 bg-white">
+        <section id="clinical-workflow" className="py-32 bg-background">
           <div className="max-w-7xl mx-auto px-6">
             <div className="mb-20">
               <h2 className="text-3xl md:text-5xl font-black tracking-tight text-slate-900 mb-4">Built Around Real <br /> Clinical Workflows</h2>
@@ -231,10 +231,10 @@ export default function LandingPage() {
             <div className="grid md:grid-cols-4 gap-12">
               {workflowSteps.map((step) => (
                 <div key={step.id} className="relative space-y-6">
-                  <div className="text-6xl font-black text-slate-100 absolute -top-10 -left-4 select-none -z-0">{step.id}</div>
+                  <div className="text-6xl font-black text-slate-100 dark:text-slate-800 absolute -top-10 -left-4 select-none -z-0">{step.id}</div>
                   <div className="relative z-10 space-y-4">
-                    <h4 className="text-xl font-bold text-slate-900">{step.title}</h4>
-                    <p className="text-slate-500 font-medium text-sm leading-relaxed">{step.description}</p>
+                    <h4 className="text-xl font-bold text-foreground">{step.title}</h4>
+                    <p className="text-muted font-medium text-sm leading-relaxed">{step.description}</p>
                   </div>
                 </div>
               ))}
@@ -300,7 +300,7 @@ export default function LandingPage() {
         <section className="py-32 bg-white">
           <div className="max-w-4xl mx-auto px-6 text-center space-y-16">
             <div className="space-y-4">
-              <h2 className="text-3xl md:text-5xl font-black tracking-tight text-slate-900">Designed for Speed and Accuracy</h2>
+              <h2 className="text-3xl md:text-5xl font-black tracking-tight text-foreground">Designed for Speed and Accuracy</h2>
               <div className="h-1 mx-auto w-20 bg-blue-600 rounded-full" />
             </div>
 
@@ -311,10 +311,10 @@ export default function LandingPage() {
                 { label: "Improved clinical coordination", icon: Layers }
               ].map((value) => (
                 <div key={value.label} className="space-y-6">
-                  <div className="h-16 w-16 mx-auto bg-slate-50 rounded-2xl flex items-center justify-center border border-slate-100">
+                  <div className="h-16 w-16 mx-auto bg-slate-50 dark:bg-slate-800 rounded-2xl flex items-center justify-center border border-slate-100 dark:border-slate-700">
                     <value.icon className="h-7 w-7 text-blue-600" />
                   </div>
-                  <p className="font-bold text-slate-900 text-lg leading-snug">{value.label}</p>
+                  <p className="font-bold text-foreground text-lg leading-snug">{value.label}</p>
                 </div>
               ))}
             </div>
@@ -345,7 +345,7 @@ export default function LandingPage() {
       </main>
 
       {/* --- FOOTER --- */}
-      <footer className="bg-[#F8FAFC] pt-32 pb-12 border-t border-slate-200">
+      <footer className="bg-slate-50 dark:bg-slate-900 pt-32 pb-12 border-t border-border">
         <div className="max-w-7xl mx-auto px-6 space-y-24">
           <div className="grid md:grid-cols-4 gap-12">
             <div className="space-y-6">

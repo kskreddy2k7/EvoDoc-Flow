@@ -1,22 +1,36 @@
 'use client';
 
-import { useAuthStore, type ThemeType } from '@/store/authStore';
+import { useTheme } from 'next-themes';
 import { Sun, Moon, Droplets, Contrast, ChevronDown, LucideIcon } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
 export function ThemeToggle({ position = 'down' }: { position?: 'up' | 'down' }) {
-  const theme = useAuthStore((s) => s.theme);
-  const setTheme = useAuthStore((s) => s.setTheme);
+  const { theme, setTheme } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
-  const themes: { id: ThemeType; label: string; icon: LucideIcon }[] = [
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const themes: { id: string; label: string; icon: LucideIcon }[] = [
     { id: 'light', label: 'Light', icon: Sun },
     { id: 'dark', label: 'Dark', icon: Moon },
-    { id: 'blue', label: 'Healthcare', icon: Droplets },
-    { id: 'contrast', label: 'Contrast', icon: Contrast },
+    { id: 'theme-blue', label: 'Healthcare', icon: Droplets },
+    { id: 'theme-contrast', label: 'Contrast', icon: Contrast },
   ];
+
+  if (!mounted) {
+    return (
+      <button className="flex items-center gap-2 px-3 py-2 rounded-xl border border-border-base bg-surface text-text-base w-full opacity-0">
+        <Sun className="h-4 w-4" />
+        <span className="text-sm font-medium">Light</span>
+        <ChevronDown className="h-4 w-4 ml-auto" />
+      </button>
+    );
+  }
 
   const currentTheme = themes.find(t => t.id === theme) || themes[0];
 
@@ -24,7 +38,7 @@ export function ThemeToggle({ position = 'down' }: { position?: 'up' | 'down' })
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-3 py-2 rounded-xl border border-border-base bg-surface text-text-base hover:bg-accent transition-all shadow-sm w-full transition-all active:scale-95"
+        className="flex items-center gap-2 px-3 py-2 rounded-xl border border-border-base bg-surface text-text-base hover:bg-accent transition-all shadow-sm w-full active:scale-95"
       >
         <currentTheme.icon className="h-4 w-4" />
         <span className="text-sm font-medium">{currentTheme.label}</span>
