@@ -46,11 +46,11 @@ export function Modal({
             <div className="sm:hidden w-12 h-1.5 bg-border-base rounded-full mx-auto mb-5" />
 
             {title && (
-              <div className="flex items-center justify-between mb-5 pb-4 border-b border-border-base">
-                <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-text-base">{title}</h3>
+              <div className="flex items-center justify-between mb-5 pb-4 border-b border-border-base/50">
+                <h3 className="text-xl sm:text-2xl font-black tracking-tight text-slate-900 dark:text-white">{title}</h3>
                 <button 
                   onClick={onClose}
-                  className="p-2 hover:bg-accent rounded-xl transition-colors text-muted hover:text-text-base"
+                  className="p-2 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-colors text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
                 >
                   <X className="h-5 w-5 sm:h-6 sm:w-6" />
                 </button>
