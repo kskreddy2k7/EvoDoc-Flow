@@ -1,4 +1,3 @@
-import React from 'react';
 import { Card, CardHeader } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
@@ -19,7 +18,15 @@ type NextPatientProps = {
   onStart?: () => void;
 };
 
-export const NextPatientCard: React.FC<NextPatientProps> = ({ patient, onStart }) => {
+type Priority = Exclude<NonNullable<NextPatientProps['patient']>['priority'], undefined>;
+
+const priorityColors: Record<Priority, string> = {
+  high: 'bg-red-500 text-white',
+  medium: 'bg-amber-500 text-white',
+  low: 'bg-green-500 text-white',
+};
+
+export function NextPatientCard({ patient, onStart }: NextPatientProps) {
   if (!patient) {
     return (
       <Card className="border-none shadow-sm p-6 text-center">
@@ -33,12 +40,6 @@ export const NextPatientCard: React.FC<NextPatientProps> = ({ patient, onStart }
       </Card>
     );
   }
-
-  const priorityColors: Record<string, string> = {
-    high: 'bg-red-500 text-white',
-    medium: 'bg-amber-500 text-white',
-    low: 'bg-green-500 text-white',
-  };
 
   return (
     <Card className="border-none shadow-premium relative overflow-hidden bg-primary text-white p-1">
@@ -95,4 +96,4 @@ export const NextPatientCard: React.FC<NextPatientProps> = ({ patient, onStart }
       </CardHeader>
     </Card>
   );
-};
+}

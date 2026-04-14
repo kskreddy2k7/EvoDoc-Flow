@@ -1,6 +1,6 @@
 'use client';
 
-import React, { Component, ErrorInfo, ReactNode } from 'react';
+import React, { Component, type ErrorInfo, type ReactNode } from 'react';
 import { Button } from '@/components/ui/Button';
 import { AlertCircle, RefreshCcw, Home } from 'lucide-react';
 import Link from 'next/link';
@@ -23,7 +23,9 @@ export class ErrorBoundary extends Component<Props, State> {
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('Uncaught error:', error, errorInfo);
+    // Intentionally no console logging here; upstream logging can be added via a monitoring tool.
+    void error;
+    void errorInfo;
   }
 
   public render() {
