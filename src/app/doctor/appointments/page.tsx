@@ -1,6 +1,6 @@
 'use client';
 
-import { useStore } from '@/store/useStore';
+import { useAppointmentStore } from '@/store/appointmentStore';
 import { Card, CardContent, CardHeader, Badge } from '@/components/ui/Card';
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/components/ui/Table';
 import { Button } from '@/components/ui/Button';
@@ -19,7 +19,7 @@ import { formatDate, cn } from '@/lib/utils';
 import { PatientRecordModal } from '@/components/PatientRecordModal';
 
 export default function DoctorAppointmentsPage() {
-  const { appointments } = useStore();
+  const appointments = useAppointmentStore((s) => s.appointments);
   const [filter, setFilter] = useState<'all' | 'Scheduled' | 'Completed' | 'Cancelled'>('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedPatientId, setSelectedPatientId] = useState<string | null>(null);

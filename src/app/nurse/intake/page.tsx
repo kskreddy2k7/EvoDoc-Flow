@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { useEffect, useState } from 'react';
+import { useForm, Controller, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { patientSchema, PatientFormValues } from '@/lib/schemas';
 import { Button } from '@/components/ui/Button';
@@ -9,7 +9,7 @@ import { Card, CardContent } from '@/components/ui/Card';
 import { Input } from '@/components/ui/Input';
 import { toast } from 'react-hot-toast';
 import { calculateAge, cn } from '@/lib/utils';
-import { useStore } from '@/store/useStore';
+import { usePatientStore } from '@/store/patientStore';
 import { 
   UserPlus, 
   ClipboardList, 
@@ -24,16 +24,17 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function PatientIntakePage() {
-  const addPatient = useStore((state) => state.addPatient);
+  const addPatient = usePatientStore((state) => state.addPatient);
   const [step, setStep] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
+  const draftKey = 'evodoc:intakeDraft:v1';
 
   const {
     register,
     handleSubmit,
     trigger,
-    watch,
     reset,
+    getValues,
     control,
     formState: { errors },
   } = useForm<PatientFormValues>({
@@ -53,11 +54,26 @@ export default function PatientIntakePage() {
     },
   });
 
-  const watchedFullName = watch('fullName');
-  const watchedDob = watch('dateOfBirth');
-  const watchedContact = watch('contactNumber');
-  const watchedEmergencyPhone = watch('emergencyPhone');
-  const watchedAllergies = watch('allergies');
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(draftKey);
+      if (!raw) return;
+      const parsed = JSON.parse(raw) as unknown;
+      if (parsed && typeof parsed === 'object') {
+        reset(parsed as PatientFormValues);
+        toast.success('Draft restored', { duration: 1800 });
+      }
+    } catch {
+      // ignore corrupt drafts
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const watchedFullName = useWatch({ control, name: 'fullName' });
+  const watchedDob = useWatch({ control, name: 'dateOfBirth' });
+  const watchedContact = useWatch({ control, name: 'contactNumber' });
+  const watchedEmergencyPhone = useWatch({ control, name: 'emergencyPhone' });
+  const watchedAllergies = useWatch({ control, name: 'allergies' });
 
   const nextStep = async () => {
     let fieldsToValidate: (keyof PatientFormValues)[] = [];
@@ -81,7 +97,6 @@ export default function PatientIntakePage() {
     setIsLoading(true);
     
     const newPatient = {
-      id: Math.random().toString(36).substr(2, 9),
       fullName: data.fullName,
       dateOfBirth: data.dateOfBirth,
       age: calculateAge(data.dateOfBirth),
@@ -100,6 +115,7 @@ export default function PatientIntakePage() {
 
     setTimeout(() => {
       addPatient(newPatient);
+      localStorage.removeItem(draftKey);
       setIsLoading(false);
       toast.success('Patient record created successfully!');
       setStep(1);
@@ -394,7 +410,14 @@ export default function PatientIntakePage() {
                 <Button 
                   variant="ghost" 
                   type="button" 
-                  onClick={() => toast.success('Draft cached locally', { icon: '💾' })}
+                  onClick={() => {
+                    try {
+                      localStorage.setItem(draftKey, JSON.stringify(getValues()));
+                      toast.success('Draft saved locally');
+                    } catch {
+                      toast.error('Unable to save draft on this device');
+                    }
+                  }}
                   disabled={isLoading}
                 >
                   Save as Draft

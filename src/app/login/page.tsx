@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { useStore } from '@/store/useStore';
+import { useAuthStore } from '@/store/authStore';
 import { useAuth } from '@/lib/useAuth';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
@@ -17,7 +17,7 @@ import { ThemeToggle } from '@/components/ThemeToggle';
 export default function LoginPage() {
   useAuth();
   const router = useRouter();
-  const setUser = useStore((state) => state.setUser);
+  const setUser = useAuthStore((state) => state.setUser);
   const [role, setRole] = useState<'nurse' | 'doctor'>('nurse');
   const [isLoading, setIsLoading] = useState(false);
   const [form, setForm] = useState({ id: '', password: '' });

@@ -1,6 +1,8 @@
 'use client';
 
-import { useStore } from '@/store/useStore';
+import { useAuthStore } from '@/store/authStore';
+import { useAppointmentStore } from '@/store/appointmentStore';
+import { usePatientStore } from '@/store/patientStore';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Badge } from '@/components/ui/Card';
@@ -23,7 +25,9 @@ import { useState } from 'react';
 import { PatientRecordModal } from '@/components/PatientRecordModal';
 
 export default function DoctorDashboard() {
-  const { user, appointments, patients } = useStore();
+  const user = useAuthStore((s) => s.user);
+  const appointments = useAppointmentStore((s) => s.appointments);
+  const patients = usePatientStore((s) => s.patients);
   const [selectedPatientId, setSelectedPatientId] = useState<string | null>(null);
   
   const today = new Date().toISOString().split('T')[0];

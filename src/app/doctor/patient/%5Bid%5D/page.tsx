@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, use } from 'react';
-import { useStore } from '@/store/useStore';
+import { useAppointmentStore } from '@/store/appointmentStore';
+import { usePatientStore } from '@/store/patientStore';
 import { Card, CardContent, CardHeader, CardTitle, Badge } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Tabs } from '@/components/ui/Modal';
@@ -29,7 +30,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 export default function PatientDetailsPage({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = use(params);
   const router = useRouter();
-  const { patients, appointments, updateAppointment } = useStore();
+  const patients = usePatientStore((s) => s.patients);
+  const appointments = useAppointmentStore((s) => s.appointments);
+  const updateAppointment = useAppointmentStore((s) => s.updateAppointment);
   const patient = patients.find(p => p.id === resolvedParams.id);
   const patientAppointments = appointments.filter(app => app.patientId === resolvedParams.id);
 

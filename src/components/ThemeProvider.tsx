@@ -1,10 +1,10 @@
 'use client';
 
 import { useEffect, useSyncExternalStore } from 'react';
-import { useStore } from '@/store/useStore';
+import { useAuthStore } from '@/store/authStore';
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const theme = useStore((state) => state.theme);
+  const theme = useAuthStore((state) => state.theme);
   const isMounted = useSyncExternalStore(
     () => () => {},
     () => true,

@@ -15,7 +15,7 @@ type StatsCardProps = {
 export const StatsCard: React.FC<StatsCardProps> = ({ label, value, icon, color, bg, trend, trendValue }) => (
   <Card className="border-none shadow-sm h-full">
     <CardContent className="p-4 sm:p-6">
-      <div className={cn('inline-flex p-2.5 rounded-2xl mb-3', bg)}>{icon}</div>
+      <div className={cn('inline-flex p-2.5 rounded-2xl mb-3', bg, color)}>{icon}</div>
       <p className="text-muted text-[10px] font-bold uppercase tracking-widest mb-1">{label}</p>
       <h3 className="text-2xl sm:text-3xl font-black text-text-base flex items-center gap-2">
         {value}
@@ -25,5 +25,4 @@ export const StatsCard: React.FC<StatsCardProps> = ({ label, value, icon, color,
       </h3>
     </CardContent>
   </Card>
-);
 );

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Toaster } from 'react-hot-toast';
@@ -13,12 +13,6 @@ export const metadata: Metadata = {
   description: 'Pro-grade clinical logic, multi-physician scheduling, and secure patient intake for modern healthcare facilities.',
   keywords: ['healthcare saas', 'clinical workflow', 'doctor scheduling', 'patient intake', 'medical record management'],
   authors: [{ name: 'EvoDoc Team' }],
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 1,
-    userScalable: false,
-  },
   icons: {
     icon: '/favicon.ico',
     apple: '/apple-icon.png',
@@ -37,6 +31,13 @@ export const metadata: Metadata = {
     description: 'Pro-grade clinical logic and physician orchestration.',
     creator: '@evodoc',
   },
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
   themeColor: '#2563eb',
 };
 

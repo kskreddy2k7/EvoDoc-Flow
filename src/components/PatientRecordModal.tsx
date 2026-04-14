@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal } from '@/components/ui/Modal';
-import { useStore } from '@/store/useStore';
+import { usePatientStore } from '@/store/patientStore';
 import { 
   Phone, 
   AlertCircle, 
@@ -22,7 +22,7 @@ export function PatientRecordModal({
   isOpen: boolean;
   onClose: () => void;
 }) {
-  const { patients } = useStore();
+  const patients = usePatientStore((s) => s.patients);
   const patient = patients.find(p => p.id === patientId);
 
   if (!patient) return null;

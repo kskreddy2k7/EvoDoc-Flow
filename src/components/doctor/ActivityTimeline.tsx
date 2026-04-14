@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { cn } from '@/lib/utils';
-import { Clock, User } from 'lucide-react';
+import { User } from 'lucide-react';
 
 type ActivityItem = {
   id: string;
@@ -57,5 +57,4 @@ export const ActivityTimeline: React.FC<ActivityTimelineProps> = ({ items }) => 
       </div>
     </CardContent>
   </Card>
-);
 );

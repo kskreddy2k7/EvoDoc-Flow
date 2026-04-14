@@ -1,7 +1,8 @@
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
-import { Badge, Button } from '@/components/ui';
-import { Clock, Users, CheckCircle2, ArrowRight } from 'lucide-react';
+import { Card, CardHeader } from '@/components/ui/Card';
+import { Badge } from '@/components/ui/Card';
+import { Button } from '@/components/ui/Button';
+import { Clock, Users, CheckCircle2, ArrowRight, Phone } from 'lucide-react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 
@@ -47,7 +48,7 @@ export const NextPatientCard: React.FC<NextPatientProps> = ({ patient, onStart }
             Next Patient
           </Badge>
           {patient.priority && (
-            <span className={cn('px-3 py-1 rounded-full text-xs font-bold', priorityColors[patient.priority]))}>
+            <span className={cn('px-3 py-1 rounded-full text-xs font-bold', priorityColors[patient.priority])}>
               {patient.priority.charAt(0).toUpperCase() + patient.priority.slice(1)}
             </span>
           )}

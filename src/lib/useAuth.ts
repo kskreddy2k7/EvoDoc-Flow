@@ -1,11 +1,11 @@
 import { useEffect, useSyncExternalStore } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
-import { useStore } from '@/store/useStore';
+import { useAuthStore } from '@/store/authStore';
 
 export function useAuth() {
   const router = useRouter();
   const pathname = usePathname();
-  const user = useStore(state => state.user);
+  const user = useAuthStore((state) => state.user);
   const isClient = useSyncExternalStore(
     () => () => {},
     () => true,
@@ -22,7 +22,7 @@ export function useAuth() {
     } else {
       // Prevent nurses from accessing doctor pages and vice versa
       if (pathname.startsWith('/doctor') && user.role !== 'doctor') {
-        router.push('/nurse/dashboard'); // Or any default nurse page
+        router.push('/nurse/intake');
       } else if (pathname.startsWith('/nurse') && user.role !== 'nurse') {
         router.push('/doctor/dashboard');
       } else if (pathname === '/login' || pathname === '/') {
@@ -30,7 +30,7 @@ export function useAuth() {
         if (user.role === 'doctor') {
           router.push('/doctor/dashboard');
         } else if (user.role === 'nurse') {
-          router.push('/nurse/appointments');
+          router.push('/nurse/intake');
         }
       }
     }

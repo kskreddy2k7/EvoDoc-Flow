@@ -16,15 +16,13 @@ import {
   MousePointer2,
   Clock,
   Layers,
-  Menu,
   X
 } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { cn } from '@/lib/utils';
 
 export default function LandingPage() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -285,7 +283,7 @@ export default function LandingPage() {
                 ].map((stat, idx) => (
                   <motion.div
                     key={idx}
-                    whileHover={{ scale: 1.05, bg: "#1E293B" }}
+                    whileHover={{ scale: 1.05, backgroundColor: "#1E293B" }}
                     className="p-8 rounded-[2rem] bg-slate-800/50 border border-slate-700 text-center space-y-4"
                   >
                     <stat.icon className="h-8 w-8 text-blue-500 mx-auto" />

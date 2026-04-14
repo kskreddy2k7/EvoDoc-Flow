@@ -1,13 +1,14 @@
 'use client';
 
-import { useStore, ThemeType } from '@/store/useStore';
+import { useAuthStore, type ThemeType } from '@/store/authStore';
 import { Sun, Moon, Droplets, Contrast, ChevronDown, LucideIcon } from 'lucide-react';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
 export function ThemeToggle({ position = 'down' }: { position?: 'up' | 'down' }) {
-  const { theme, setTheme } = useStore();
+  const theme = useAuthStore((s) => s.theme);
+  const setTheme = useAuthStore((s) => s.setTheme);
   const [isOpen, setIsOpen] = useState(false);
 
   const themes: { id: ThemeType; label: string; icon: LucideIcon }[] = [

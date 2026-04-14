@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { useStore } from '@/store/useStore';
+import { useAuthStore } from '@/store/authStore';
 import { 
   Activity, 
   LogOut, 
@@ -14,8 +14,9 @@ import {
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/Button';
 import { ThemeToggle } from '@/components/ThemeToggle';
-import { motion, AnimatePresence, HTMLMotionProps } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useSidebar } from '@/context/SidebarContext';
+import { useEffect } from 'react';
 
 interface SidebarItem {
   icon: LucideIcon;
@@ -27,14 +28,20 @@ interface SidebarItem {
 export function Sidebar({ items }: { items: SidebarItem[] }) {
   const pathname = usePathname();
   const router = useRouter();
-  const logout = useStore((state) => state.logout);
-  const user = useStore((state) => state.user);
+  const logout = useAuthStore((state) => state.logout);
+  const user = useAuthStore((state) => state.user);
   const { 
     collapsed: isCollapsed, 
     toggle: toggleCollapse,
     mobileOpen,
-    toggleMobile
+    toggleMobile,
+    setMobileOpen
   } = useSidebar();
+
+  useEffect(() => {
+    if (mobileOpen) setMobileOpen(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
 
   const handleLogout = () => {
     logout();
@@ -94,10 +101,13 @@ export function Sidebar({ items }: { items: SidebarItem[] }) {
 
       <nav id="tour-sidebar-nav" className="flex-1 p-4 space-y-2 overflow-y-auto">
         {items.map((item) => {
-          const isActive = pathname === item.href;
+          const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
           return (
             <Link key={item.href} href={item.href}>
-              <div id={item.id} className={cn(
+              <div
+                id={item.id}
+                onClick={() => setMobileOpen(false)}
+                className={cn(
                 "group flex items-center gap-3 px-4 py-3.5 rounded-2xl transition-all font-bold text-sm",
                 isActive 
                   ? "bg-primary text-white shadow-lg shadow-primary/20" 

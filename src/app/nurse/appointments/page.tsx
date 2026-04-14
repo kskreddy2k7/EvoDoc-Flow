@@ -1,11 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { appointmentSchema, AppointmentFormValues } from '@/lib/schemas';
-import { useStore } from '@/store/useStore';
+import { useAppointmentStore } from '@/store/appointmentStore';
+import { usePatientStore } from '@/store/patientStore';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader, Badge } from '@/components/ui/Card';
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from '@/components/ui/Table';
@@ -44,7 +44,11 @@ const CLINIC_PHYSICIANS = [
 ];
 
 export default function NurseAppointmentsPage() {
-  const { appointments, addAppointment, updateAppointment, deleteAppointment, patients } = useStore();
+  const appointments = useAppointmentStore((s) => s.appointments);
+  const addAppointment = useAppointmentStore((s) => s.addAppointment);
+  const updateAppointment = useAppointmentStore((s) => s.updateAppointment);
+  const deleteAppointment = useAppointmentStore((s) => s.deleteAppointment);
+  const patients = usePatientStore((s) => s.patients);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [debouncedSearch, setDebouncedSearch] = useState('');
@@ -63,7 +67,7 @@ export default function NurseAppointmentsPage() {
     register,
     handleSubmit,
     reset,
-    watch,
+    control,
     formState: { errors },
   } = useForm<AppointmentFormValues>({
     resolver: zodResolver(appointmentSchema),
@@ -77,8 +81,8 @@ export default function NurseAppointmentsPage() {
     },
   });
 
-  const selectedDoctorId = watch('doctorId');
-  const selectedDate = watch('date');
+  const selectedDoctorId = useWatch({ control, name: 'doctorId' });
+  const selectedDate = useWatch({ control, name: 'date' });
 
   const timeSlots = [
     '09:00 AM', '09:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM',
@@ -150,7 +154,6 @@ export default function NurseAppointmentsPage() {
       toast.success('Clinical encounter securely updated.');
     } else {
       addAppointment({
-        id: Math.random().toString(36).substr(2, 9),
         patientId: data.patientId,
         patientName: patient?.fullName || 'Unknown',
         doctorId: data.doctorId,
@@ -412,7 +415,7 @@ export default function NurseAppointmentsPage() {
                          <CalendarClock className="h-8 w-8 opacity-50" />
                        </div>
                        <span className="font-bold text-text-base text-lg">No Encounters Scheduled</span>
-                       <span className="font-medium text-muted text-sm max-w-[300px]">Queue is clear. Click "Schedule Session" to assign a patient.</span>
+                       <span className="font-medium text-muted text-sm max-w-[300px]">Queue is clear. Click &quot;Schedule Session&quot; to assign a patient.</span>
                        {(searchTerm || filterStatus !== 'All') && (
                          <Button onClick={() => { setSearchTerm(''); setFilterStatus('All'); }} variant="outline" className="mt-4 h-9 rounded-xl font-bold">Clear Filters</Button>
                        )}
