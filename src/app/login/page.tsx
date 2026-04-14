@@ -98,24 +98,26 @@ export default function LoginPage() {
          </div>
       </div>
 
-      <div className="flex-1 flex items-center justify-center p-6 lg:p-8 relative z-10 mb-10 w-full">
-        <div className="absolute top-4 lg:top-8 left-4 lg:right-8 z-50 flex items-center gap-4 w-full px-6 lg:px-12 justify-between pointer-events-none">
+      <div className="flex-1 flex flex-col p-4 sm:p-8 lg:p-12 relative z-10 w-full overflow-y-auto">
+         <div className="flex items-center justify-between w-full mb-8 z-50 pointer-events-none lg:absolute lg:top-8 lg:left-0 lg:px-12 lg:mb-0 flex-shrink-0">
            <Link href="/" className="pointer-events-auto">
-             <Button variant="ghost" className="gap-2 font-bold hover:bg-accent/50 rounded-xl group transition-all">
+             <Button variant="ghost" className="gap-2 font-bold hover:bg-accent/50 rounded-xl group transition-all -ml-2 lg:ml-0">
                <ChevronLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform" />
-               Back to Home
+               <span className="hidden sm:inline">Back to Home</span>
+               <span className="inline sm:hidden">Back</span>
              </Button>
            </Link>
            <div className="pointer-events-auto">
              <ThemeToggle />
            </div>
-        </div>
-        
-        <div className="w-full max-w-lg mx-auto space-y-10 lg:mt-0 mt-8">
-          <div className="text-center space-y-3">
-             <h2 className="text-3xl lg:text-4xl font-black tracking-tight text-text-base">Secure Clinical Access</h2>
-             <p className="text-muted font-bold tracking-tight">Sign in to your clinical workspace to manage patient operations and workflows.</p>
-          </div>
+         </div>
+         
+         <div className="flex-1 flex flex-col w-full max-w-lg mx-auto">
+           <div className="space-y-8 w-full my-auto pb-12 pt-4 lg:pt-0">
+             <div className="text-center space-y-3">
+               <h2 className="text-3xl lg:text-4xl font-black tracking-tight text-text-base">Secure Clinical Access</h2>
+               <p className="text-muted font-bold tracking-tight">Sign in to your clinical workspace to manage patient operations and workflows.</p>
+             </div>
 
           <div className="flex flex-col sm:flex-row bg-accent/50 p-1.5 rounded-3xl border border-border-base relative overflow-hidden gap-1.5">
              <button 
@@ -123,7 +125,7 @@ export default function LoginPage() {
                onClick={() => setRole('nurse')}
                className={cn(
                  "relative flex-1 flex flex-col items-center gap-2 py-6 rounded-2xl transition-all z-10 hover:scale-[1.02]",
-                 role === 'nurse' ? "text-primary ring-2 ring-primary bg-primary/5" : "text-muted hover:text-text-base hover:bg-accent"
+                 role === 'nurse' ? "text-text-base dark:text-white ring-2 ring-primary bg-primary/10" : "text-muted hover:text-text-base hover:bg-accent"
                )}
              >
                 {role === 'nurse' && (
@@ -138,7 +140,7 @@ export default function LoginPage() {
                onClick={() => setRole('doctor')}
                className={cn(
                  "relative flex-1 flex flex-col items-center gap-2 py-6 rounded-2xl transition-all z-10 hover:scale-[1.02]",
-                 role === 'doctor' ? "text-primary ring-2 ring-primary bg-primary/5" : "text-muted hover:text-text-base hover:bg-accent"
+                 role === 'doctor' ? "text-text-base dark:text-white ring-2 ring-primary bg-primary/10" : "text-muted hover:text-text-base hover:bg-accent"
                )}
              >
                 {role === 'doctor' && (
@@ -211,12 +213,13 @@ export default function LoginPage() {
           </Card>
 
           <div className="text-center space-y-5">
-            <p className="text-xs font-bold text-muted uppercase tracking-[0.2em] max-w-[280px] mx-auto leading-relaxed">
-               Access restricted to authorized medical personnel.
-            </p>
-            <div className="flex items-center justify-center gap-2 text-[10px] text-green-600 font-bold bg-green-500/10 w-max mx-auto px-4 py-2 rounded-full border border-green-500/20">
+             <p className="text-xs font-bold text-muted dark:text-slate-300 uppercase tracking-[0.2em] max-w-[280px] mx-auto leading-relaxed">
+                Access restricted to authorized medical personnel.
+             </p>
+             <div className="flex items-center justify-center gap-2 text-[10px] text-green-600 font-bold bg-green-500/10 w-max mx-auto px-4 py-2 rounded-full border border-green-500/20">
               <Lock className="h-3 w-3" /> Secure login • Encrypted access
             </div>
+          </div>
           </div>
         </div>
       </div>

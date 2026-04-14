@@ -17,9 +17,12 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { formatDate, cn } from '@/lib/utils';
 import { PatientRecordModal } from '@/components/PatientRecordModal';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
 export default function DoctorAppointmentsPage() {
   const appointments = useAppointmentStore((s) => s.appointments);
+  const updateAppointment = useAppointmentStore((s) => s.updateAppointment);
   const [filter, setFilter] = useState<'all' | 'Scheduled' | 'Completed' | 'Cancelled'>('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedPatientId, setSelectedPatientId] = useState<string | null>(null);
@@ -29,6 +32,41 @@ export default function DoctorAppointmentsPage() {
     const matchesSearch = app.patientName.toLowerCase().includes(searchTerm.toLowerCase());
     return matchesFilter && matchesSearch;
   });
+
+  const handleDownloadPDF = () => {
+    const doc = new jsPDF();
+    
+    doc.setFontSize(20);
+    doc.text('EvoDoc Flow', 14, 22);
+    
+    doc.setFontSize(14);
+    doc.text('Clinical Schedule Summary', 14, 32);
+
+    const pending = appointments.filter(a => a.status === 'Scheduled').length;
+    const completed = appointments.filter(a => a.status === 'Completed').length;
+    
+    doc.setFontSize(10);
+    doc.text(`Pending Consults: ${pending}`, 14, 42);
+    doc.text(`Completed Today: ${completed}`, 14, 48);
+    
+    const tableData = filteredAppointments.map(app => [
+      app.patientName,
+      formatDate(app.date),
+      app.timeSlot,
+      app.type,
+      app.status
+    ]);
+
+    autoTable(doc, {
+      startY: 55,
+      head: [['Patient Name', 'Date', 'Time', 'Type', 'Status']],
+      body: tableData,
+      theme: 'grid',
+      headStyles: { fillColor: [37, 99, 235] },
+    });
+
+    doc.save('clinical-schedule-report.pdf');
+  };
 
   return (
     <div className="space-y-10">
@@ -97,13 +135,25 @@ export default function DoctorAppointmentsPage() {
                              <p className="text-[10px] font-black text-muted tracking-tighter uppercase">{formatDate(app.date)}</p>
                            </div>
                          </div>
-                         <Badge 
-                           variant={app.status === 'Scheduled' ? 'default' : app.status === 'Completed' ? 'success' : 'error'}
-                           pulse={app.status === 'Scheduled'}
-                           className="flex-shrink-0 rounded-lg h-7 font-black tracking-tighter"
-                         >
-                           {app.status}
-                         </Badge>
+                         <div onClick={(e) => e.stopPropagation()}>
+                           <select
+                             className={cn(
+                               "rounded-lg h-7 px-3 py-1 font-black text-[10px] uppercase tracking-widest border border-transparent outline-none cursor-pointer text-center appearance-none flex-shrink-0",
+                               app.status === 'Scheduled' ? 'bg-primary/10 text-primary' : 
+                               app.status === 'Completed' ? 'bg-green-500/10 text-green-500' :
+                               app.status === 'Waiting' ? 'bg-amber-500/10 text-amber-500' :
+                               app.status === 'In Progress' ? 'bg-blue-500/10 text-blue-500' : 'bg-red-500/10 text-red-500'
+                             )}
+                             value={app.status}
+                             onChange={(e) => updateAppointment(app.id, { status: e.target.value as any })}
+                           >
+                             <option className="bg-surface text-text-base font-bold uppercase" value="Scheduled">Scheduled</option>
+                             <option className="bg-surface text-text-base font-bold uppercase" value="Waiting">Waiting</option>
+                             <option className="bg-surface text-text-base font-bold uppercase" value="In Progress">In Progress</option>
+                             <option className="bg-surface text-text-base font-bold uppercase" value="Completed">Completed</option>
+                             <option className="bg-surface text-text-base font-bold uppercase" value="Cancelled">Cancelled</option>
+                           </select>
+                         </div>
                        </div>
                        <div className="grid grid-cols-2 gap-2 text-xs">
                          <div className="flex items-center gap-2 bg-accent/60 rounded-xl p-2.5">
@@ -159,14 +209,24 @@ export default function DoctorAppointmentsPage() {
                           </TableCell>
                           <TableCell className="text-center font-black text-sm text-text-base/80">{app.timeSlot}</TableCell>
                           <TableCell className="text-xs font-bold text-muted">{app.type}</TableCell>
-                          <TableCell>
-                            <Badge 
-                              variant={app.status === 'Scheduled' ? 'default' : app.status === 'Completed' ? 'success' : 'error'}
-                              pulse={app.status === 'Scheduled'}
-                              className="rounded-lg h-7 font-black tracking-tighter"
+                          <TableCell onClick={(e) => e.stopPropagation()}>
+                            <select
+                               className={cn(
+                                 "rounded-lg h-7 px-3 py-1 font-black text-[10px] uppercase tracking-widest border border-transparent outline-none cursor-pointer text-center appearance-none",
+                                 app.status === 'Scheduled' ? 'bg-primary/10 text-primary' : 
+                                 app.status === 'Completed' ? 'bg-green-500/10 text-green-500' :
+                                 app.status === 'Waiting' ? 'bg-amber-500/10 text-amber-500' :
+                                 app.status === 'In Progress' ? 'bg-blue-500/10 text-blue-500' : 'bg-red-500/10 text-red-500'
+                               )}
+                               value={app.status}
+                               onChange={(e) => updateAppointment(app.id, { status: e.target.value as any })}
                             >
-                              {app.status}
-                            </Badge>
+                               <option className="bg-surface text-text-base font-bold uppercase" value="Scheduled">Scheduled</option>
+                               <option className="bg-surface text-text-base font-bold uppercase" value="Waiting">Waiting</option>
+                               <option className="bg-surface text-text-base font-bold uppercase" value="In Progress">In Progress</option>
+                               <option className="bg-surface text-text-base font-bold uppercase" value="Completed">Completed</option>
+                               <option className="bg-surface text-text-base font-bold uppercase" value="Cancelled">Cancelled</option>
+                            </select>
                           </TableCell>
                           <TableCell className="text-right">
                              <Button variant="ghost" size="icon" className="h-10 w-10 rounded-xl hover:bg-primary hover:text-white transition-all group-hover:bg-primary/5 group-hover:text-primary">
@@ -209,14 +269,11 @@ export default function DoctorAppointmentsPage() {
                     <span className="text-2xl font-black">{appointments.filter(a => a.status === 'Completed').length}</span>
                  </div>
               </div>
-              <Button className="w-full h-12 rounded-xl bg-white text-primary hover:bg-white/90 mt-8 border-none font-black shadow-lg">Download PDF Report</Button>
+              <Button onClick={handleDownloadPDF} className="w-full h-12 rounded-xl bg-white text-primary hover:bg-white/90 mt-8 border-none font-black shadow-lg">Download PDF Report</Button>
            </Card>
 
            <Card className="border-none shadow-sm p-8 space-y-6">
-              <div className="flex items-center gap-4 text-amber-600 bg-amber-50 p-4 rounded-2xl border border-amber-100 dark:bg-amber-900/10 dark:border-amber-900/30">
-                 <AlertCircle className="h-5 w-5 flex-shrink-0" />
-                 <p className="text-xs font-bold leading-relaxed">3 patients in your queue have reported high-priority allergies. Review medical profiles before consultation.</p>
-              </div>
+
               <div className="space-y-4">
                  <p className="text-[10px] font-black text-muted uppercase tracking-widest">Queue Support</p>
                  <div className="flex items-center gap-4 p-4 rounded-2xl border border-border-base hover:border-primary/30 transition-all cursor-pointer">

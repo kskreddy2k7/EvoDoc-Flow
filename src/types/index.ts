@@ -29,7 +29,7 @@ export interface Patient {
   createdAt: string;
 }
 
-export type AppointmentStatus = 'Scheduled' | 'Completed' | 'Cancelled' | 'In Progress';
+export type AppointmentStatus = 'Scheduled' | 'Completed' | 'Cancelled' | 'In Progress' | 'Waiting';
 export type AppointmentType = 'Consultation' | 'Follow-up' | 'Emergency' | 'Procedure' | 'Lab Review';
 
 export interface Appointment {

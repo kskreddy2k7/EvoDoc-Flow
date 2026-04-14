@@ -139,7 +139,7 @@ export default function LandingPage() {
                 <br className="md:hidden" />
                 Workflows.
               </h1>
-              <p className="text-xl md:text-2xl font-black italic text-blue-600/40 tracking-tight">Built for Modern Healthcare Systems.</p>
+              <p className="text-xl md:text-2xl font-black italic text-blue-600/60 dark:text-blue-400/80 tracking-tight">Built for Modern Healthcare Systems.</p>
             </motion.div>
 
             {/* Subheadline */}
@@ -203,8 +203,7 @@ export default function LandingPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  whileHover={{ y: -10 }}
-                  className="group bg-white p-12 rounded-[2.5rem] border border-border-base transition-all shadow-sm hover:shadow-2xl hover:shadow-blue-500/5 overflow-hidden relative"
+                  className="group bg-surface p-12 rounded-[2.5rem] border border-border-base transition-all shadow-sm hover:shadow-2xl hover:shadow-blue-500/5 overflow-hidden relative"
                 >
                   <div className="absolute top-0 right-0 p-8 opacity-0 group-hover:opacity-5 transition-opacity">
                     <feature.icon className="h-32 w-32 -mr-16 -mt-16 text-foreground" />
@@ -231,7 +230,7 @@ export default function LandingPage() {
             <div className="grid md:grid-cols-4 gap-12">
               {workflowSteps.map((step) => (
                 <div key={step.id} className="relative space-y-6">
-                  <div className="text-6xl font-black text-slate-100 dark:text-slate-800 absolute -top-10 -left-4 select-none -z-0">{step.id}</div>
+                  <div className="text-6xl font-black text-slate-100 dark:text-slate-800/50 absolute -top-10 -left-4 select-none -z-0">{step.id}</div>
                   <div className="relative z-10 space-y-4">
                     <h4 className="text-xl font-bold text-foreground">{step.title}</h4>
                     <p className="text-muted font-medium text-sm leading-relaxed">{step.description}</p>
@@ -297,7 +296,7 @@ export default function LandingPage() {
         </section>
 
         {/* --- VALUE SECTION --- */}
-        <section className="py-32 bg-white">
+        <section className="py-32 bg-background">
           <div className="max-w-4xl mx-auto px-6 text-center space-y-16">
             <div className="space-y-4">
               <h2 className="text-3xl md:text-5xl font-black tracking-tight text-foreground">Designed for Speed and Accuracy</h2>
@@ -372,7 +371,7 @@ export default function LandingPage() {
             ))}
           </div>
 
-          <div className="pt-12 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="pt-12 border-t border-border-base flex flex-col md:flex-row justify-between items-center gap-6">
             <p className="text-[10px] md:text-xs font-black uppercase tracking-[0.2em] text-muted">
               © 2026 EvoDoc Flow. Handcrafted for clinical excellence.
             </p>

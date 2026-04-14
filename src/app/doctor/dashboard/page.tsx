@@ -20,7 +20,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { formatDate, cn } from '@/lib/utils';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import { PatientRecordModal } from '@/components/PatientRecordModal';
 
@@ -29,6 +29,7 @@ export default function DoctorDashboard() {
   const appointments = useAppointmentStore((s) => s.appointments);
   const patients = usePatientStore((s) => s.patients);
   const [selectedPatientId, setSelectedPatientId] = useState<string | null>(null);
+  const [isNotifsOpen, setIsNotifsOpen] = useState(false);
   
   const today = new Date().toISOString().split('T')[0];
   const todayAppointments = appointments.filter(app => app.date === today && app.status !== 'Cancelled');
@@ -56,14 +57,63 @@ export default function DoctorDashboard() {
           <p className="text-muted font-medium text-sm">Here’s your clinical overview for today.</p>
         </div>
         <div className="flex items-center gap-3">
-          <Button variant="outline" size="icon" className="relative h-10 w-10 rounded-xl flex-shrink-0">
-            <Bell className="h-5 w-5" />
-            <span className="absolute top-2 right-2 h-2 w-2 bg-red-500 rounded-full border-2 border-surface animate-pulse"></span>
-          </Button>
-          <Button className="gap-2 px-5 h-10 rounded-xl shadow-lg shadow-primary/20 text-sm">
-            <CalendarDays className="h-4 w-4" />
-            Schedule
-          </Button>
+          <div className="relative">
+            <Button 
+              variant="outline" 
+              size="icon" 
+              onClick={() => setIsNotifsOpen(!isNotifsOpen)}
+              className="relative h-10 w-10 rounded-xl flex-shrink-0"
+            >
+              <Bell className="h-5 w-5" />
+              <span className="absolute top-2 right-2 h-2 w-2 bg-red-500 rounded-full border-2 border-surface animate-pulse"></span>
+            </Button>
+            
+            <AnimatePresence>
+              {isNotifsOpen && (
+                 <motion.div 
+                   initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                   animate={{ opacity: 1, y: 0, scale: 1 }}
+                   exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                   className="absolute top-14 right-0 z-50 w-[320px] sm:w-80 bg-surface border border-border-base rounded-2xl shadow-premium overflow-hidden"
+                 >
+                   <div className="p-4 border-b border-border-base flex justify-between items-center bg-accent/30">
+                     <span className="font-black text-text-base">Notifications</span>
+                     <span className="bg-primary text-white text-[10px] font-black px-2 py-0.5 rounded-full">2 New</span>
+                   </div>
+                   <div className="p-2 space-y-1 max-h-80 overflow-y-auto">
+                     <div className="p-3 hover:bg-accent/50 rounded-xl cursor-pointer transition-colors relative group">
+                       <span className="absolute top-5 left-3 h-2 w-2 bg-red-500 rounded-full flex-shrink-0"></span>
+                       <div className="pl-5 space-y-1">
+                         <p className="text-sm font-bold text-text-base leading-tight">High-priority allergy reported</p>
+                         <p className="text-[10px] font-bold text-muted uppercase tracking-widest mt-1">Michael Chen • 5m ago</p>
+                       </div>
+                     </div>
+                     <div className="p-3 hover:bg-accent/50 rounded-xl cursor-pointer transition-colors relative group">
+                       <span className="absolute top-5 left-3 h-2 w-2 bg-primary rounded-full flex-shrink-0"></span>
+                       <div className="pl-5 space-y-1">
+                         <p className="text-sm font-bold text-text-base leading-tight">New lab results uploaded</p>
+                         <p className="text-[10px] font-bold text-muted uppercase tracking-widest mt-1">Sarah Jenkins • 1hr ago</p>
+                       </div>
+                     </div>
+                   </div>
+                   <div className="p-3 border-t border-border-base text-center">
+                     <button 
+                       onClick={() => setIsNotifsOpen(false)}
+                       className="text-xs font-black text-primary uppercase tracking-widest hover:underline"
+                     >
+                       Mark all as read
+                     </button>
+                   </div>
+                 </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+          <Link href="/doctor/appointments">
+            <Button className="gap-2 px-5 h-10 rounded-xl shadow-lg shadow-primary/20 text-sm">
+              <CalendarDays className="h-4 w-4" />
+              Schedule
+            </Button>
+          </Link>
         </div>
       </div>
 
@@ -212,21 +262,6 @@ export default function DoctorDashboard() {
             </CardContent>
           </Card>
 
-          <Card className="bg-text-base text-surface border-none shadow-2xl overflow-hidden group">
-            <CardContent className="p-8 text-center relative">
-              <motion.div 
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-                className="absolute -top-20 -right-20 w-40 h-40 bg-primary/20 rounded-full blur-3xl group-hover:bg-primary/40 transition-all"
-              />
-              <div className="h-16 w-16 bg-primary rounded-2xl mx-auto flex items-center justify-center mb-6 shadow-xl shadow-primary/40">
-                <Activity className="h-8 w-8 text-white" />
-              </div>
-              <h4 className="font-black text-xl mb-4 tracking-tight">System Status</h4>
-              <p className="text-sm text-muted mb-8 leading-relaxed font-medium">All clinical modules are operational. Database latency: 14ms.</p>
-              <Button className="w-full h-12 rounded-xl bg-surface text-text-base hover:bg-accent border-none shadow-sm">Run Diagnostics</Button>
-            </CardContent>
-          </Card>
         </div>
       </div>
       <PatientRecordModal 
