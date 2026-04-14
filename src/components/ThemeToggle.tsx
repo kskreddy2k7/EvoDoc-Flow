@@ -1,7 +1,7 @@
 'use client';
 
 import { useTheme } from 'next-themes';
-import { Sun, Moon, Droplets, Contrast, ChevronDown, LucideIcon } from 'lucide-react';
+import { Sun, Moon, ChevronDown, LucideIcon } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
@@ -18,8 +18,6 @@ export function ThemeToggle({ position = 'down' }: { position?: 'up' | 'down' })
   const themes: { id: string; label: string; icon: LucideIcon }[] = [
     { id: 'light', label: 'Light', icon: Sun },
     { id: 'dark', label: 'Dark', icon: Moon },
-    { id: 'theme-blue', label: 'Healthcare', icon: Droplets },
-    { id: 'theme-contrast', label: 'Contrast', icon: Contrast },
   ];
 
   if (!mounted) {
